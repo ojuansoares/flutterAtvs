@@ -31,7 +31,6 @@ class Event {
     required this.description,
   });
 
-  // Converter para JSON
   Map<String, dynamic> toJson() {
     return {
       'date': date,
@@ -40,7 +39,6 @@ class Event {
     };
   }
 
-  // Criar evento a partir de JSON
   factory Event.fromJson(Map<String, dynamic> json) {
     return Event(
       date: json['date'],
@@ -75,7 +73,6 @@ class _EventRegistryScreenState extends State<EventRegistryScreen> {
     super.dispose();
   }
 
-  // Carregar eventos do SharedPreferences
   Future<void> _loadEvents() async {
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -93,7 +90,6 @@ class _EventRegistryScreenState extends State<EventRegistryScreen> {
     }
   }
 
-  // Salvar eventos no SharedPreferences
   Future<void> _saveEvents() async {
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -110,7 +106,6 @@ class _EventRegistryScreenState extends State<EventRegistryScreen> {
     }
   }
 
-  // Selecionar data
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -125,7 +120,6 @@ class _EventRegistryScreenState extends State<EventRegistryScreen> {
     }
   }
 
-  // Selecionar hora
   Future<void> _selectTime(BuildContext context) async {
     final TimeOfDay? picked = await showTimePicker(
       context: context,
@@ -138,7 +132,6 @@ class _EventRegistryScreenState extends State<EventRegistryScreen> {
     }
   }
 
-  // Adicionar novo evento
   void _addEvent() {
     if (_formKey.currentState!.validate()) {
       final newEvent = Event(
@@ -163,7 +156,6 @@ class _EventRegistryScreenState extends State<EventRegistryScreen> {
     }
   }
 
-  // Remover evento
   void _removeEvent(int index) {
     setState(() {
       _events.removeAt(index);
@@ -186,7 +178,6 @@ class _EventRegistryScreenState extends State<EventRegistryScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // Formulário de entrada
             Card(
               elevation: 4,
               child: Padding(
@@ -203,7 +194,6 @@ class _EventRegistryScreenState extends State<EventRegistryScreen> {
                       ),
                       SizedBox(height: 16),
                       
-                      // Seleção de data
                       InkWell(
                         onTap: () => _selectDate(context),
                         child: InputDecorator(
@@ -220,8 +210,7 @@ class _EventRegistryScreenState extends State<EventRegistryScreen> {
                         ),
                       ),
                       SizedBox(height: 16),
-                      
-                      // Seleção de hora
+
                       InkWell(
                         onTap: () => _selectTime(context),
                         child: InputDecorator(
@@ -237,8 +226,7 @@ class _EventRegistryScreenState extends State<EventRegistryScreen> {
                         ),
                       ),
                       SizedBox(height: 16),
-                      
-                      // Campo de descrição
+
                       TextFormField(
                         controller: _descriptionController,
                         decoration: InputDecoration(
@@ -255,8 +243,7 @@ class _EventRegistryScreenState extends State<EventRegistryScreen> {
                         },
                       ),
                       SizedBox(height: 16),
-                      
-                      // Botão para adicionar evento
+
                       ElevatedButton(
                         onPressed: _addEvent,
                         child: Text('Adicionar Evento'),
@@ -271,8 +258,7 @@ class _EventRegistryScreenState extends State<EventRegistryScreen> {
             ),
             
             SizedBox(height: 20),
-            
-            // Lista de eventos
+
             Expanded(
               child: Card(
                 elevation: 4,
